@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ApiResponse;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -9,9 +10,11 @@ class PostController extends Controller
 {
     public function index()
     {
-        return view('post.index', [
-            'posts' => Post::latest()->get()
-        ]);
+        return request()->expectsJson()
+            ? ApiResponse::withData(Post::latest()->select(['id', 'title', 'created_at'])->get())->send()
+            : view('post.index', [
+                'posts' => Post::latest()->get()
+            ]);
     }
 
     public function create()
@@ -26,8 +29,18 @@ class PostController extends Controller
             'body' => 'required',
         ]);
 
-        Post::create($request->all());
+        $post = Post::create($request->all());
 
-        return redirect()->route('post.index');
+        return request()->expectsJson()
+            ? ApiResponse::withData($post->only(['id', 'title']))->send()
+            : redirect()->route('post.index');
+    }
+
+    public function show(Post $post, \App\ApiResponse $response)
+    {
+        $response->statusCode = 200;
+        $response->data = $post->only(['id', 'title', 'body', 'updated_at']);
+
+        return $response->send();
     }
 }
