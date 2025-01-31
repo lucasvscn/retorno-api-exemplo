@@ -5,26 +5,26 @@
 O objetivo desse exemplo é demonstrar o uso de técnicas para padronizar as
 respostas de API em uma aplicação Laravel.
 
-*Problemas:*
+**Problemas:**
 
  - Monolito tem rotas Web e AJAX
  - Mesma aplicação é usada como backend para app mobile
  - Monolito web e app mobile compartilham algumas rotas, mas não todas
  - Base de código grande e complexa
 
-*Premissas:*
+**Premissas:**
 
  - Padronização não deve exigir mudanças estruturantes
  - Ponto único de controle para respostas de erro
  - Rotas Web e AJAX não devem sofrer alterações
 
-*Solução:*
+**Solução:**
 
  - Definir classe de resposta padrão para API
  - Configurar renderable() para tratar exceções e retornar respostas padronizadas
  - Criar um middleware para injetar cabeçalho na request para identificar chamadas da API
 
-*Arquivos de interesse da solução:*
+**Arquivos de interesse da solução:**
 
  - [`app/ApiResponse.php`](app/ApiResponse.php)
  - [`app/Exceptions/Handler.php`](app/Exceptions/Handler.php)
