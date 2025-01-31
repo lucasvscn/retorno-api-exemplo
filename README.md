@@ -174,3 +174,32 @@ Response:
   "meta": []
 }
 ```
+
+### Request API para criar um post, com erro de validação:
+
+```shell
+curl -s -X POST --url http://localhost:8000/api/post \
+--header 'Accept: application/json' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode 'title='
+```
+
+Response:
+
+```json
+{
+  "status": 422,
+  "error_code": 1001,
+  "message": "Erro de validação",
+  "data": null,
+  "validation_errors": {
+    "title": [
+      "The title field is required."
+    ],
+    "body": [
+      "The body field is required."
+    ]
+  },
+  "meta": []
+}
+```
