@@ -26,8 +26,8 @@ respostas de API em uma aplicação Laravel.
 
 *Arquivos de interesse da solução:*
 
- - `app/ApiResponse.php`
- - `app/Exceptions/Handler.php`
+ - [`app/ApiResponse.php`](app/ApiResponse.php)
+ - [`app/Exceptions/Handler.php`](app/Exceptions/Handler.php)
 
 ## Instruções para execução
 
